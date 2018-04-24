@@ -1,8 +1,13 @@
 package edu.illinois.cs.cs125.lab12;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -11,8 +16,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
+
 
 /**
  * Main class for our UI design lab.
@@ -37,8 +45,14 @@ public final class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.activity_main);
-
-        startAPICall();
+        final Button update = findViewById(R.id.Update);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                Log.d(TAG, "update button clicked");
+                startAPICall();
+            }
+        });
     }
 
     /**
@@ -53,10 +67,11 @@ public final class MainActivity extends AppCompatActivity {
      * Make a call to the weather API.
      */
     void startAPICall() {
+        final Intent intent = new Intent(this, SecondActivity.class);
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "http://api.openweathermap.org/data/2.5/weather?zip=61820,us&appid="
+                    "https://developers.zomato.com/api/v2.1/categories?apikey="
                             + BuildConfig.API_KEY,
                     null,
                     new Response.Listener<JSONObject>() {
@@ -64,6 +79,10 @@ public final class MainActivity extends AppCompatActivity {
                         public void onResponse(final JSONObject response) {
                             try {
                                 Log.d(TAG, response.toString(2));
+                                TextView textview = findViewById(R.id.textView);
+                                textview.setText(response.toString(2));
+                                startActivity(intent);
+                                Log.d(TAG, "here");
                             } catch (JSONException ignored) { }
                         }
                     }, new Response.ErrorListener() {
