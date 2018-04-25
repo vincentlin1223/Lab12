@@ -32,6 +32,16 @@ public final class MainActivity extends AppCompatActivity {
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
 
+    /**dsfg*/
+    private static String location;
+
+    /**fadf*/
+    public static String getLocation() {
+        return MainActivity.location;
+    }
+
+
+
     /**
      * Run when this activity comes to the foreground.
      *
@@ -62,7 +72,6 @@ public final class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
     }
-
     /**
      * Make a call to the weather API.
      */
@@ -71,7 +80,7 @@ public final class MainActivity extends AppCompatActivity {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://developers.zomato.com/api/v2.1/categories?apikey="
+                    "https://developers.zomato.com/api/v2.1/search?entity_id=130687&entity_type=subzone&apikey="
                             + BuildConfig.API_KEY,
                     null,
                     new Response.Listener<JSONObject>() {
@@ -79,18 +88,19 @@ public final class MainActivity extends AppCompatActivity {
                         public void onResponse(final JSONObject response) {
                             try {
                                 Log.d(TAG, response.toString(2));
-                                TextView textview = findViewById(R.id.textView);
-                                textview.setText(response.toString(2));
+                                //TextView textview = findViewById(R.id.textView3);
+                                //textview.setText(response.toString(2));
                                 startActivity(intent);
                                 Log.d(TAG, "here");
+                                Log.d(TAG, "activity 2");
                             } catch (JSONException ignored) { }
                         }
                     }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(final VolleyError error) {
-                            Log.e(TAG, error.toString());
-                        }
-                    });
+                @Override
+                public void onErrorResponse(final VolleyError error) {
+                    Log.e(TAG, error.toString());
+                }
+            });
             requestQueue.add(jsonObjectRequest);
         } catch (Exception e) {
             e.printStackTrace();
