@@ -15,7 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -43,6 +46,8 @@ public final class SecondActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_second);
         String location = MainActivity.getLocation();
+        TextView textView = findViewById(R.id.restaurant);
+        textView.setText(location);
         startAPICall();
     }
 
@@ -59,7 +64,7 @@ public final class SecondActivity extends AppCompatActivity {
      */
     void startAPICall() {
         try {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+            final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
                     "https://developers.zomato.com/api/v2.1/search?entity_id=130687&entity_type=subzone&apikey="
                             + BuildConfig.API_KEY,
@@ -71,10 +76,20 @@ public final class SecondActivity extends AppCompatActivity {
                                 Log.d(TAG, response.toString(2));
                                 TextView textview = findViewById(R.id.textView3);
                                 textview.setText(response.toString(2));
+                                JSONArray restaurantsArr = response.getJSONArray("restaurants");
+                                Log.d(TAG,"wooo" + restaurantsArr);
+                                for (int i = 0; i < restaurantsArr.length(); i++) {
+                                    JSONObject restaurant = restaurantsArr.getJSONObject(i);
+                                    Log.d(TAG, "array:" + restaurant);
+                                    JSONObject localRes = restaurant.getJSONObject("restaurant");
+                                    String name = localRes.getString("name");
+                                    Log.d(TAG,"name:" + name);
+                                }
                                 Log.d(TAG, "activity 2");
                             } catch (JSONException ignored) { }
                         }
-                    }, new Response.ErrorListener() {
+                    }
+                    , new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(final VolleyError error) {
                     Log.e(TAG, error.toString());

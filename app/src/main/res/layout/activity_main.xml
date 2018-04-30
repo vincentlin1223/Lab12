@@ -21,25 +21,44 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             tools:text="Type" />
 
-        <CheckBox
-            android:id="@+id/checkBox"
+        <EditText
+            android:id="@+id/others"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Asian"
-            tools:text="Asian" />
+            android:ems="10"
+            android:hint="@android:string/VideoView_error_button"
+            android:inputType="textNoSuggestions|textPersonName"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
+            tools:text="others" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/Mexican"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="European"
-            tools:text="European" />
+            android:text="Mexican"
+            tools:text="Mexican" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/Indian "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="American" />
+            android:text="Indian"
+            tools:text="Indian" />
+
+        <CheckBox
+            android:id="@+id/Thai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thai"
+            tools:text="Thai" />
+
+        <CheckBox
+            android:id="@+id/Chinese"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chinese"
+            tools:text="Chinese" />
 
         <View
             android:id="@+id/divider"
@@ -65,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="cheap"
-                tools:text="10" />
+                tools:text="Normal" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
@@ -73,15 +92,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Medium"
-                tools:text="10 - 30" />
+                tools:text="Medium" />
 
             <RadioButton
                 android:id="@+id/radioButton5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="expensive"
-                tools:text="30" />
+                android:text="Expensive"
+                tools:text="Expensive" />
 
         </RadioGroup>
 

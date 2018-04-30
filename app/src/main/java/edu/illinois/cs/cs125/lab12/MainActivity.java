@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -15,11 +18,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonParser;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
+
+import java.sql.SQLOutput;
 
 
 /**
@@ -55,12 +61,35 @@ public final class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.activity_main);
+
+        final Button asian = findViewById(R.id.Mexican);
+        asian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                Log.d(TAG, "Asian button clicked");
+                location = "taiwan";
+            }
+        });
+
+        final EditText others = findViewById(R.id.others);
+        others.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    final String text = others.getText().toString();
+                    Log.d(TAG,text);
+                }
+                return handled;
+            }
+        });
+
         final Button update = findViewById(R.id.Update);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 Log.d(TAG, "update button clicked");
-                startAPICall();
+                //startAPICall();
             }
         });
     }
@@ -88,11 +117,7 @@ public final class MainActivity extends AppCompatActivity {
                         public void onResponse(final JSONObject response) {
                             try {
                                 Log.d(TAG, response.toString(2));
-                                //TextView textview = findViewById(R.id.textView3);
-                                //textview.setText(response.toString(2));
                                 startActivity(intent);
-                                Log.d(TAG, "here");
-                                Log.d(TAG, "activity 2");
                             } catch (JSONException ignored) { }
                         }
                     }, new Response.ErrorListener() {
@@ -102,6 +127,7 @@ public final class MainActivity extends AppCompatActivity {
                 }
             });
             requestQueue.add(jsonObjectRequest);
+            System.out.println("json response:" + jsonObjectRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }
