@@ -18,19 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Type"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@android:style/TextAppearance.Widget.PopupMenu.Large"
             tools:text="Type" />
-
-        <EditText
-            android:id="@+id/others"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@android:string/VideoView_error_button"
-            android:inputType="textNoSuggestions|textPersonName"
-            android:selectAllOnFocus="false"
-            android:singleLine="true"
-            tools:text="others" />
 
         <CheckBox
             android:id="@+id/Mexican"
@@ -40,7 +29,7 @@
             tools:text="Mexican" />
 
         <CheckBox
-            android:id="@+id/Indian "
+            android:id="@+id/Indian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Indian"
@@ -60,18 +49,36 @@
             android:text="Chinese"
             tools:text="Chinese" />
 
+        <CheckBox
+            android:id="@+id/Korean"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Korean"
+            tools:text="Korean" />
+
+        <CheckBox
+            android:id="@+id/American"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="American"
+            tools:text="American" />
+
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Price Range"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@android:style/TextAppearance.Widget.PopupMenu.Large"
             tools:text="Price Range" />
 
         <RadioGroup
@@ -79,15 +86,15 @@
             android:layout_height="match_parent">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/cheap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="cheap"
-                tools:text="Normal" />
+                android:text="Cheap"
+                tools:text="Cheap" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -95,50 +102,12 @@
                 tools:text="Medium" />
 
             <RadioButton
-                android:id="@+id/radioButton5"
+                android:id="@+id/expensive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Expensive"
                 tools:text="Expensive" />
-
-        </RadioGroup>
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:background="?android:attr/listDivider" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Location"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            tools:text="Location" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioButton
-                android:id="@+id/radioButton6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="off-Campus"
-                tools:text="off-Campus" />
-
-            <RadioButton
-                android:id="@+id/radioButton7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="On-Campus"
-                tools:text="On-Campus" />
 
         </RadioGroup>
 

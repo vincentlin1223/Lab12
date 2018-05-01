@@ -1,6 +1,8 @@
 package edu.illinois.cs.cs125.lab12;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -27,7 +35,7 @@ import org.json.JSONStringer;
 /**
  * Main class for our UI design lab.
  */
-public final class SecondActivity extends AppCompatActivity {
+public final class SecondActivity extends FragmentActivity implements OnMapReadyCallback {
     /**
      * dmdm
      */
@@ -45,10 +53,26 @@ public final class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestQueue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_second);
-        String location = MainActivity.getLocation();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        String name = MainActivity.getRestaurantName();
         TextView textView = findViewById(R.id.restaurant);
-        textView.setText(location);
+        textView.setText(name);
+        TextView addressView = findViewById(R.id.address);
+        addressView.setText(MainActivity.getAddr());
         startAPICall();
+    }
+
+    private GoogleMap mMap;
+
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng location = new LatLng(MainActivity.getLats(), MainActivity.getLongs());
+        mMap.addMarker(new MarkerOptions().position(location).title(MainActivity.getRestaurantName()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16.0f));
     }
 
     /**
@@ -63,41 +87,28 @@ public final class SecondActivity extends AppCompatActivity {
      * Make a call to the weather API.
      */
     void startAPICall() {
-        try {
-            final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                    Request.Method.GET,
-                    "https://developers.zomato.com/api/v2.1/search?entity_id=130687&entity_type=subzone&apikey="
-                            + BuildConfig.API_KEY,
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(final JSONObject response) {
-                            try {
-                                Log.d(TAG, response.toString(2));
-                                TextView textview = findViewById(R.id.textView3);
-                                textview.setText(response.toString(2));
-                                JSONArray restaurantsArr = response.getJSONArray("restaurants");
-                                Log.d(TAG,"wooo" + restaurantsArr);
-                                for (int i = 0; i < restaurantsArr.length(); i++) {
-                                    JSONObject restaurant = restaurantsArr.getJSONObject(i);
-                                    Log.d(TAG, "array:" + restaurant);
-                                    JSONObject localRes = restaurant.getJSONObject("restaurant");
-                                    String name = localRes.getString("name");
-                                    Log.d(TAG,"name:" + name);
-                                }
-                                Log.d(TAG, "activity 2");
-                            } catch (JSONException ignored) { }
-                        }
-                    }
-                    , new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(final VolleyError error) {
-                    Log.e(TAG, error.toString());
-                }
-            });
-            requestQueue.add(jsonObjectRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        final Intent intent = new Intent(this, MainActivity.class);
+        TextView textView = findViewById(R.id.rating);
+       textView.setText("Rating: " + MainActivity.getRating());
+
+        final Button website = findViewById(R.id.Website);
+        website.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                String url = MainActivity.getWebs();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        final Button goBack = findViewById(R.id.goBack);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                startActivity(intent);
+            }
+        });
     }
 }
+
+
