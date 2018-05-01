@@ -8,10 +8,47 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <TextView
+            android:id="@+id/Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/typeName"
@@ -19,6 +56,8 @@
             android:layout_height="wrap_content"
             android:text="Type"
             android:textAppearance="@android:style/TextAppearance.Widget.PopupMenu.Large"
+            android:textSize="30sp"
+            app:fontFamily="sans-serif-smallcaps"
             tools:text="Type" />
 
         <CheckBox
@@ -26,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mexican"
+            android:textSize="18sp"
             tools:text="Mexican" />
 
         <CheckBox
@@ -33,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Indian"
+            android:textSize="18sp"
             tools:text="Indian" />
 
         <CheckBox
@@ -40,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Thai"
+            android:textSize="18sp"
             tools:text="Thai" />
 
         <CheckBox
@@ -47,6 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Chinese"
+            android:textSize="18sp"
             tools:text="Chinese" />
 
         <CheckBox
@@ -54,6 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Korean"
+            android:textSize="18sp"
             tools:text="Korean" />
 
         <CheckBox
@@ -61,6 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="American"
+            android:textSize="18sp"
             tools:text="American" />
 
         <View
@@ -71,7 +116,13 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="45dp" />
+            android:layout_height="30dp" />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/textView4"
@@ -79,6 +130,8 @@
             android:layout_height="wrap_content"
             android:text="Price Range"
             android:textAppearance="@android:style/TextAppearance.Widget.PopupMenu.Large"
+            android:textSize="30sp"
+            app:fontFamily="sans-serif-smallcaps"
             tools:text="Price Range" />
 
         <RadioGroup
@@ -91,6 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cheap"
+                android:textSize="18sp"
                 tools:text="Cheap" />
 
             <RadioButton
@@ -99,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Medium"
+                android:textSize="18sp"
                 tools:text="Medium" />
 
             <RadioButton
@@ -107,7 +162,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Expensive"
+                android:textSize="18sp"
                 tools:text="Expensive" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="?android:attr/listDivider" />
 
         </RadioGroup>
 
@@ -121,9 +184,10 @@
 
         <Button
             android:id="@+id/Update"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="search"
+            android:textSize="20sp"
             android:visibility="visible" />
 
     </LinearLayout>

@@ -89,6 +89,16 @@ public final class MainActivity extends AppCompatActivity {
     public static String getAddr() {
         return addr;
     }
+
+    private static String typeCuisine;
+    public static String getTypeCuisine() {
+        return typeCuisine;
+    }
+
+    private static String averagePrice;
+    public static String getAveragePrice() {
+        return averagePrice;
+    }
     /**
      * Run when this activity comes to the foreground.
      *
@@ -102,7 +112,10 @@ public final class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.activity_main);
-
+        TextView description = findViewById(R.id.Description);
+        description.setText("Let us decide what you eat!");
+        TextView descriptions = findViewById(R.id.description);
+        descriptions.setText("Select your preferences~");
         final Button mexican = findViewById(R.id.Mexican);
         mexican.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -328,6 +341,9 @@ public final class MainActivity extends AppCompatActivity {
 
                                 double latitude = localLoc.getDouble("latitude");
                                 double longitude = localLoc.getDouble("longitude");
+
+                                typeCuisine = localRes.getString("cuisines");
+                                averagePrice = localRes.getString("average_cost_for_two");
 
                                 String address = localLoc.getString("address");
                                 Log.d(TAG, "-----");

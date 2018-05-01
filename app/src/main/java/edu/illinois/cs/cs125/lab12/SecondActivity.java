@@ -87,9 +87,14 @@ public final class SecondActivity extends FragmentActivity implements OnMapReady
      * Make a call to the weather API.
      */
     void startAPICall() {
-        final Intent intent = new Intent(this, MainActivity.class);
         TextView textView = findViewById(R.id.rating);
-       textView.setText("Rating: " + MainActivity.getRating());
+        textView.setText("{Rating} : " + MainActivity.getRating() + " / 5.0");
+
+        TextView typeCuisine = findViewById(R.id.cuisines);
+        typeCuisine.setText("{Keywords} : " + MainActivity.getTypeCuisine());
+
+        TextView averagePrice = findViewById(R.id.averagePrice);
+        averagePrice.setText("{Average price for two} : $" + MainActivity.getAveragePrice());
 
         final Button website = findViewById(R.id.Website);
         website.setOnClickListener(new View.OnClickListener() {
@@ -99,13 +104,6 @@ public final class SecondActivity extends FragmentActivity implements OnMapReady
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
-            }
-        });
-        final Button goBack = findViewById(R.id.goBack);
-        goBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                startActivity(intent);
             }
         });
     }
